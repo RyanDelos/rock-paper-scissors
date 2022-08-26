@@ -46,11 +46,16 @@ function playRound(playerSelection, computerSelection) {
 
 // game function loops the game 5 times
 function game() {
+  // loop through game
   for (let i = 0; i < 5; i++) {
     playerSelection = prompt(
       'Choose your weapon: Rock 🪨, Paper 📄, Scissors ✂️'
     ).toLowerCase();
-    console.log(playRound(playerSelection, getComputerChoice()));
+    if (!playerSelection) {
+      console.log('Invalid response');
+    } else {
+      console.log(playRound(playerSelection, getComputerChoice()));
+    }
   }
   console.log(`player score: ${playerScore}, computer score: ${computerScore}`);
 
@@ -60,7 +65,7 @@ function game() {
   } else if (playerScore < computerScore) {
     console.log('COMPUTER WINS! 🏆');
   } else {
-    console.log(`TIE GAME`);
+    console.log(`NO WINNER`);
   }
 }
 
