@@ -48,11 +48,12 @@ function playRound(playerSelection, computerSelection) {
 function game() {
   // loop through game
   for (let i = 0; i < 5; i++) {
+    console.log(`ROUND: ${i + 1}`);
     playerSelection = prompt(
       'Choose your weapon: Rock 🪨, Paper 📄, Scissors ✂️'
     ).toLowerCase();
     if (!playerSelection) {
-      console.log('Invalid response');
+      console.log('Invalid response, lose a round');
     } else {
       console.log(playRound(playerSelection, getComputerChoice()));
     }
