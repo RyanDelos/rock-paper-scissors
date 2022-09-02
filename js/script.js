@@ -1,25 +1,25 @@
 'use strict';
 
-// Global Variables
+/* Global Variables */
 let playerSelection;
 let playerScore = 0;
 let computerScore = 0;
 
-// Get the computers choice
+/* Get the computers choice */
 function getComputerChoice() {
   const computerChoices = ['rock', 'paper', 'scissors'];
 
-  // randomly select from 0 - 2
+  /* randomly select from 0 - 2 */
   let computerSelection = Math.floor(Math.random() * computerChoices.length);
   return computerChoices[computerSelection];
 }
 
-// takes 2 parameters which is the players choice and computers choice
+/* function takes 2 parameters which is the players choice and computers choice */
 function playRound(playerSelection, computerSelection) {
   const playerWinsMsg = 'Player Wins';
   const computerWinsMsg = 'Computer Wins';
 
-  // if/else to compare the player choice vs computer choice
+  /*  this condition compares the player choice vs computer choice then tallies each win */
   console.log(`player: ${playerSelection} || computer: ${computerSelection}`);
   if (playerSelection == 'rock' && computerSelection == 'scissors') {
     playerScore += 1;
@@ -44,9 +44,8 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-// game function loops the game 5 times
+/* this game() function calls the playRound() function and loops 5 times */
 function game() {
-  // loop through game
   for (let i = 0; i < 5; i++) {
     console.log(`ROUND: ${i + 1}`);
     playerSelection = prompt(
@@ -60,7 +59,11 @@ function game() {
   }
   console.log(`player score: ${playerScore}, computer score: ${computerScore}`);
 
-  // Determines winner
+  getWinner();
+}
+
+function getWinner() {
+  /* This condition determines winner */
   if (playerScore > computerScore) {
     console.log('YOU WON! 🏆');
   } else if (playerScore < computerScore) {
