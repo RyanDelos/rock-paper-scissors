@@ -1,76 +1,130 @@
 'use strict';
 
 /* Global Variables */
-let playerSelection;
-let playerScore = 0;
-let computerScore = 0;
+// let playerSelection;
+const compChoice = document.querySelector('.comp-choice');
+const paperBtn = document.querySelector('.paper');
+const playerChoice = document.querySelector('.player-choice');
+const resetBtn = document.querySelector('.reset-btn');
+const rockBtn = document.querySelector('.rock');
+const scissorsBtn = document.querySelector('.scissors');
+const roundWonMessage = document.querySelector('.round-won');
+const year = document.querySelector('.year');
+const winnerModal = document.querySelector('.winner-modal');
+const winnerText = document.querySelector('.winner-text');
+let date = new Date();
+let scorePlayer = 0;
+let scoreComp = 0;
+let computerScore = document.querySelector('.comp-score');
+let playerScore = document.querySelector('.player-score');
+let currentYear = date.getFullYear();
+
+rockBtn.addEventListener('click', () => userClick('rock'));
+paperBtn.addEventListener('click', () => userClick('paper'));
+scissorsBtn.addEventListener('click', () => userClick('scissors'));
 
 /* Get the computers choice */
 function getComputerChoice() {
   const computerChoices = ['rock', 'paper', 'scissors'];
 
   /* randomly select from 0 - 2 */
-  let computerSelection = Math.floor(Math.random() * computerChoices.length);
-  return computerChoices[computerSelection];
+  let randomNum = Math.floor(Math.random() * computerChoices.length);
+
+  return computerChoices[randomNum];
+}
+
+function getChoices(playerSelection, computerSelection) {
+  switch (playerSelection) {
+    case 'rock':
+      playerChoice.textContent = `rock`;
+      break;
+    case 'paper':
+      playerChoice.textContent = `paper`;
+      break;
+    case 'scissors':
+      playerChoice.textContent = `scissors`;
+      break;
+  }
+
+  switch (computerSelection) {
+    case 'rock':
+      compChoice.textContent = `rock`;
+      break;
+    case 'paper':
+      compChoice.textContent = `paper`;
+      break;
+    case 'scissors':
+      compChoice.textContent = `scissors`;
+      break;
+  }
 }
 
 /* function takes 2 parameters which is the players choice and computers choice */
 function playRound(playerSelection, computerSelection) {
-  const playerWinsMsg = 'Player Wins';
-  const computerWinsMsg = 'Computer Wins';
-
   /*  this condition compares the player choice vs computer choice then tallies each win */
-  console.log(`player: ${playerSelection} || computer: ${computerSelection}`);
-  if (playerSelection == 'rock' && computerSelection == 'scissors') {
-    playerScore += 1;
-    return playerWinsMsg;
-  } else if (playerSelection == 'scissors' && computerSelection == 'rock') {
-    computerScore += 1;
-    return computerWinsMsg;
-  } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
-    playerScore += 1;
-    return playerWinsMsg;
-  } else if (playerSelection == 'paper' && computerSelection == 'scissors') {
-    computerScore += 1;
-    return computerWinsMsg;
-  } else if (playerSelection == 'paper' && computerSelection == 'rock') {
-    playerScore += 1;
-    return playerWinsMsg;
-  } else if (playerSelection == 'rock' && computerSelection == 'paper') {
-    computerScore += 1;
-    return computerWinsMsg;
-  } else {
-    return `TIE`;
+  if (
+    (playerSelection == 'rock' && computerSelection == 'scissors') ||
+    (playerSelection == 'scissors' && computerSelection == 'paper') ||
+    (playerSelection == 'paper' && computerSelection == 'rock')
+  ) {
+    scorePlayer++;
+    playerScore.textContent = `${scorePlayer}`;
+    roundWonMessage.textContent = `You won this round`;
   }
-}
 
-/* this game() function calls the playRound() function and loops 5 times */
-function game() {
-  for (let i = 0; i < 5; i++) {
-    console.log(`ROUND: ${i + 1}`);
-    playerSelection = prompt(
-      'Choose your weapon: Rock 🪨, Paper 📄, Scissors ✂️'
-    ).toLowerCase();
-    if (!playerSelection) {
-      console.log('Invalid response, lose a round');
-    } else {
-      console.log(playRound(playerSelection, getComputerChoice()));
-    }
+  if (
+    (playerSelection == 'scissors' && computerSelection == 'rock') ||
+    (playerSelection == 'paper' && computerSelection == 'scissors') ||
+    (playerSelection == 'rock' && computerSelection == 'paper')
+  ) {
+    scoreComp++;
+    computerScore.textContent = `${scoreComp}`;
+    roundWonMessage.textContent = `Computer won this round`;
   }
-  console.log(`player score: ${playerScore}, computer score: ${computerScore}`);
 
-  getWinner();
+  if (
+    (playerSelection == 'scissors' && computerSelection == 'scissors') ||
+    (playerSelection == 'paper' && computerSelection == 'paper') ||
+    (playerSelection == 'rock' && computerSelection == 'rock')
+  ) {
+    roundWonMessage.textContent = `TIE`;
+  }
 }
 
 function getWinner() {
   /* This condition determines winner */
-  if (playerScore > computerScore) {
-    console.log('YOU WON! 🏆');
-  } else if (playerScore < computerScore) {
-    console.log('COMPUTER WINS! 🏆');
-  } else {
-    console.log(`NO WINNER`);
+  if (scorePlayer === 5) {
+    winnerModal.style.backgroundColor = '#40c057';
+    winnerText.textContent = 'You Win! 🏆';
+    winnerModal.style.display = 'block';
+  }
+  if (scoreComp === 5) {
+    winnerModal.style.backgroundColor = '#ff6b6b';
+    winnerText.textContent = 'You lose 👎🏽';
+    winnerModal.style.display = 'block';
   }
 }
 
-game();
+// When user clicks game starts
+function userClick(playerSelection) {
+  const compSelection = getComputerChoice();
+
+  getChoices(playerSelection, compSelection);
+  playRound(playerSelection, compSelection);
+  getWinner();
+}
+
+// user resets game when button clicked
+resetBtn.addEventListener('click', function () {
+  compChoice.textContent = '';
+  computerScore.textContent = '0';
+  playerChoice.textContent = '';
+  playerScore.textContent = '0';
+  roundWonMessage.textContent = '';
+  scoreComp = 0;
+  scorePlayer = 0;
+  winnerModal.style.display = 'none';
+});
+
+// set current year for copy right
+year.textContent = currentYear;

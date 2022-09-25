@@ -5,13 +5,81 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- CSS -->
     <link rel="stylesheet" href="./css/general.css" />
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="./css/queries.css" />
 
-    <script defer src="./js/script.js"></script>
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
 
+    <!-- FONT AWESOME -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/bb515311f9.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- JS -->
+    <script defer src="./js/script.js"></script>
     <title>Rock, Paper, Scissors Shoot!</title>
   </head>
-  <body></body>
+  <body>
+    <main id="main">
+      <section id="heading-section">
+        <div class="heading-container">
+          <h1 class="heading">Rock-Paper-Scissors</h1>
+          <p class="instructions">First to 5 wins</p>
+          <p class="instructions">Select your weapon</p>
+          <p class="round-won"></p>
+        </div>
+      </section>
+
+      <section id="weapons-section">
+        <div class="weapons-container">
+          <button class="weapon-btn rock">
+            <i class="fa-sharp fa-solid fa-hand-back-fist"></i>
+          </button>
+          <button class="weapon-btn paper">
+            <i class="fa-sharp fa-solid fa-hand"></i>
+          </button>
+          <button class="weapon-btn scissors">
+            <i class="fa-sharp fa-solid fa-hand-scissors"></i>
+          </button>
+        </div>
+      </section>
+
+      <section id="score-section">
+        <div class="score-container">
+          <div class="participants">
+            <p class="player">Player:<span class="player-score">0 </span></p>
+            <p>&nbspVS.&nbsp</p>
+            <p class="computer">Comp:<span class="comp-score">0 </span></p>
+          </div>
+          <div class="weapon-choice">
+            <span class="weapon player-choice"> </span>
+            <span class="weapon comp-choice"> </span>
+          </div>
+          <!-- <p class="round-won"></p> -->
+        </div>
+      </section>
+
+      <div class="winner-modal">
+        <p class="winner-text">You win 🏆!</p>
+        <button class="reset-btn">Play again?</button>
+      </div>
+    </main>
+
+    <footer id="footer">
+      <p class="copyright">
+        Copyright &copy; <span class="year">2021</span> Developed by Ryan Delos
+        Santos
+      </p>
+    </footer>
+  </body>
 </html>

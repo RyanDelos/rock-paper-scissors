@@ -52,3 +52,25 @@ margin-bottom: 4.8
 gap: 2.4 ,9.6rem
 padding-left: 9.6rem
 */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #eee;
+  color: #333;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+}
+
+.main {
+  max-width: 120rem;
+  position: relative;
+}
